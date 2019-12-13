@@ -285,7 +285,8 @@ async function updateCourseFindByIdAndUpdate(id) {
         author: 'Gary M Cooper Jr.',
         isPublished: false,
       },    
-    }, { new: true },
+    },
+    { new: true },
   );
   console.log('updateCourseFindByIdAndUpdate course: ', course);
 }
