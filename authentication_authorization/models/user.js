@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema({
   isAdmin: Boolean
 });
 
+// encapsulate jwt functionality in Mongoose Model for user object
+// Information Expert Principle: user object has enough information to handle this logic itself; no need for external function
+// Note: cannot user arrow function here because we need the 'this' context of the user object
 userSchema.methods.generateAuthToken = function() {
                                                                   //--Name of config property--//
   const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.jwtPrivateKey);
