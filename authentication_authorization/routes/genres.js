@@ -10,6 +10,13 @@ router.get('/', async (req, res) => {
   res.send(genres);
 });
 
+// only allow authenticated users
+/* 
+  NOTICE: the post() method has 3 arguments
+    1) route
+    2) auth middleware, which protects the route
+    3) callback
+*/
 router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
@@ -33,6 +40,7 @@ router.put('/:id', async (req, res) => {
   res.send(genre);
 });
 
+// middleware functions are executed in order provided 1) auth, 2) admin
 router.delete('/:id', [auth, admin], async (req, res) => {
   const genre = await Genre.findByIdAndRemove(req.params.id);
 

@@ -52,6 +52,35 @@
      * - never store jwt private key in public file
      */
 
+  /**
+   * Protect routes with auth middleware
+   * 
+   * NOTICE: the post() method has 3 arguments
+      1) route
+      2) auth middleware, which protects the route
+      3) callback
+
+      router.post('/', auth, async (req, res) => {
+        const { error } = validate(req.body); 
+        if (error) return res.status(400).send(error.details[0].message);
+
+        let genre = new Genre({ name: req.body.name });
+        genre = await genre.save();
+        
+        res.send(genre);
+      });
+   */
+
+   /**
+    * LOGOUT a user
+    * 
+    * - to logout a user, just delete the token on the front-end
+    * 
+    * - never store tokens on the server or in the db, even if they are hashed
+    * 
+    * 
+    */
+
  const config = require('config');
  const dotenv = require('dotenv');
  const Joi = require('joi');

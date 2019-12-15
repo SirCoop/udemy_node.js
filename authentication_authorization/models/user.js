@@ -22,14 +22,18 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  isAdmin: Boolean
+  // pass something (to generateAuthToken) that determines level of user access in jwt generated during authentication
+  // then add middleware to check these values
+  isAdmin: Boolean,
+  // role: [],
+  // operations: [],
 });
 
 // encapsulate jwt functionality in Mongoose Model for user object
 // Information Expert Principle: user object has enough information to handle this logic itself; no need for external function
 // Note: cannot user arrow function here because we need the 'this' context of the user object
 userSchema.methods.generateAuthToken = function() {
-                                                                  //--Name of config property--//
+  //                                     Role-based Authorization    Name of config property
   const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.jwtPrivateKey);
   return token;
 }

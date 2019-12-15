@@ -6,8 +6,12 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
+/*         route,  auth middleware,  callback       */
 router.get('/me', auth, async (req, res) => {
-  const user = await User.findById(req.user._id).select('-password');
+  // _.id is only available if this request has a valid token
+  // the token is used to decode the user info in the auth middleware
+  // auth then returns the user info attached to the req.user object
+  const user = await User.findById(req.user._id).select('-password'); // exclude password property from user object
   res.send(user);
 });
 
