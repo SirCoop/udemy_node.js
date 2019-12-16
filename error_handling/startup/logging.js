@@ -20,7 +20,9 @@ module.exports = function() {
   // this allows us to handle and log exceptions outside of the context of express
   // only works for synchronous code, not for promises
   winston.handleExceptions(
-    new winston.transports.File({ filename: 'uncaughtExceptions.log' }));    
+    new winston.transports.Console({ colorize: true, prettyPrint: true }),
+    new winston.transports.File({ filename: 'uncaughtExceptions.log' })
+  ); 
   
   /**
    *  this is an event emitter that allows us to subscribe to unhandled promise rejections
