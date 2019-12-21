@@ -14,7 +14,7 @@ describe('/api/genres', () => {
    * the port is in use
    */
   beforeEach(() => { server = require('../../index'); })
-  afterEach(async () => { 
+  afterEach(async () => {
     server.close(); 
     await Genre.remove({});
   });
@@ -39,13 +39,15 @@ describe('/api/genres', () => {
 
   describe('GET /:id', () => {
     it('should return a genre if valid id is passed', async () => {
+      // _id is type ObjectId when setting in DB
       const genre = new Genre({ name: 'genre1' });
       await genre.save();
 
+      // _id is a string when reading from DB
       const res = await request(server).get('/api/genres/' + genre._id);
 
       expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty('name', genre.name);     
+      expect(res.body).toHaveProperty('name', genre.name); 
     });
 
     it('should return 404 if invalid id is passed', async () => {
@@ -78,9 +80,9 @@ describe('/api/genres', () => {
     }
 
     beforeEach(() => {
-      token = new User().generateAuthToken();      
-      name = 'genre1'; 
-    })
+      token = new User().generateAuthToken();
+      name = 'genre1';
+    });
 
     it('should return 401 if client is not logged in', async () => {
       token = ''; 
@@ -91,7 +93,7 @@ describe('/api/genres', () => {
     });
 
     it('should return 400 if genre is less than 5 characters', async () => {
-      name = '1234'; 
+      name = '1234';
       
       const res = await exec();
 

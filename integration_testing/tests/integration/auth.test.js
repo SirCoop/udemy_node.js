@@ -4,12 +4,13 @@ const request = require('supertest');
 
 describe('auth middleware', () => {
   beforeEach(() => { server = require('../../index'); })
-  afterEach(async () => { 
+  afterEach(async () => {
+    // removes all genres
     await Genre.remove({});
     server.close(); 
   });
 
-  let token; 
+  let token;
 
   const exec = () => {
     return request(server)
@@ -31,7 +32,7 @@ describe('auth middleware', () => {
   });
 
   it('should return 400 if token is invalid', async () => {
-    token = 'a'; 
+    token = 'a';
 
     const res = await exec();
 

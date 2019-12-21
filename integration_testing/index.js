@@ -5,6 +5,9 @@
  */
 
 /**
+ * 
+ * tests folder demonstrates the differences between unit tests and integation tests
+ * 
  * Integration tests are ran off of a real database,
  * but not the same DB used for development or production.
  * 
