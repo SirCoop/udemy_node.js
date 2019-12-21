@@ -1,3 +1,9 @@
+/**
+ * Set NODE_ENV in windows with:
+ * 
+ * $env:NODE_ENV="test"
+ */
+
 const config = require('config');
 const Joi = require('joi');
 const logger = require('./logger');

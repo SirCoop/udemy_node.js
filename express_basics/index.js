@@ -1,3 +1,9 @@
+/**
+ * Set NODE_ENV in windows with:
+ * 
+ * $env:NODE_ENV="test"
+ */
+
 // dependencies get listed first
 const Joi = require('joi');
 const express = require('express');
